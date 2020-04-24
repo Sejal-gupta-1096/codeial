@@ -8,6 +8,9 @@ const port = 100;
 //6) Installing and acquiring express-ejs-layouts
 const expressLayouts = require("express-ejs-layouts");
 
+//9)Connecting to database
+const db = require("./config/mongoose");
+
 
 app.use(expressLayouts);
 
@@ -17,8 +20,6 @@ app.use(express.static("./assets"));
 //8)Extracting links and scripts from individual pages and place them in head
 app.set("layout extractStyles" ,true);
 app.set("layout extractScripts" ,true);
-
-
 
 //4) Acquiring Router Middleware
 app.use("/",require("./routes/index"));
