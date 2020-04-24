@@ -5,9 +5,20 @@ const app = express();
 //2)defining port no.
 const port = 100;
  
-//5) Installing and acquiring express-ejs-layouts
+//6) Installing and acquiring express-ejs-layouts
 const expressLayouts = require("express-ejs-layouts");
+
+
 app.use(expressLayouts);
+
+//7)Linking static files
+app.use(express.static("./assets"));
+
+//8)Extracting links and scripts from individual pages and place them in head
+app.set("layout extractStyles" ,true);
+app.set("layout extractScripts" ,true);
+
+
 
 //4) Acquiring Router Middleware
 app.use("/",require("./routes/index"));

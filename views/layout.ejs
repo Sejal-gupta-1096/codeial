@@ -3,10 +3,13 @@
         <title>
             <%= title%>
         </title>
+        <link rel="stylesheet" type="text/css" href="/css/layout.css">
+        <%- style %>
     </head>
 
     <body>
         <%- include("_header") %>
         <%- body %>
         <%- include("_footer") %>
+    </body>
 </html>
