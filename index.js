@@ -11,6 +11,13 @@ const expressLayouts = require("express-ejs-layouts");
 //9)Connecting to database
 const db = require("./config/mongoose");
 
+//11)Setting up the cookies
+const cookieParser = require("cookie-parser");
+
+//10)Setting middleware for decoding the post request
+app.use(express.urlencoded());
+
+app.use(cookieParser());
 
 app.use(expressLayouts);
 
