@@ -8,12 +8,20 @@ module.exports.profile = function(request , response){
 }
 
 module.exports.sign_up = function(request , response){
+
+    if(request.isAuthenticated()){
+        return response.redirect("/users/profile");
+    }
     return response.render("sign_up" , {
         title:"Codeial | Sign-Up"
     });
 }
 
 module.exports.sign_in = function(request , response){
+    if(request.isAuthenticated()){
+        return response.redirect("/users/profile");
+    }
+
     return response.render("sign_in" , {
         title:"Codeial | Sign-In"
     });
@@ -43,4 +51,13 @@ module.exports.create_user = function(request , response){
             })
         }
     })
+}
+
+module.exports.createSession = function(request , response){
+    return response.redirect("/");
+}
+
+module.exports.destroySession = function(request , response){
+    request.logOut();
+    return response.redirect("/");
 }

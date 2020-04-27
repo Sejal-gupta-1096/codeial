@@ -11,8 +11,14 @@ const expressLayouts = require("express-ejs-layouts");
 //9)Connecting to database
 const db = require("./config/mongoose");
 
-//11)Setting up the cookies
+//11)Using cookies
 const cookieParser = require("cookie-parser");
+//12)Using express session for session cookie
+const session = require("express-session");
+const passport = require("passport");
+const passportLocal = require("./config/passport-local-strategy");
+
+const MongoStore = require("connect-mongo")(session);
 
 //10)Setting middleware for decoding the post request
 app.use(express.urlencoded());
@@ -21,6 +27,29 @@ app.use(cookieParser());
 
 app.use(expressLayouts);
 
+
+app.use(session({
+    name : "codeial",
+    secret : "somethingsomething" , 
+    saveUninitialized : false,
+    resave : false , 
+    cookie : {
+        maxAge : (1000 * 60 * 100)
+    } , 
+    store : new MongoStore({
+        mongooseConnection : db,
+        autoRemove : 'disabled'
+    } , function(error){
+        console.log("Unable to store session cookie in database");
+    })
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
+//4) Acquiring Router Middleware
+app.use("/",require("./routes/index"));
+
 //7)Linking static files
 app.use(express.static("./assets"));
 
@@ -28,8 +57,6 @@ app.use(express.static("./assets"));
 app.set("layout extractStyles" ,true);
 app.set("layout extractScripts" ,true);
 
-//4) Acquiring Router Middleware
-app.use("/",require("./routes/index"));
 
 //5)Setting up View Enjine
 app.set("view engine" , "ejs");
