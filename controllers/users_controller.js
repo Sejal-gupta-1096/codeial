@@ -1,6 +1,7 @@
 
 const Users = require("../models/users");
 
+
 module.exports.profile = function(request , response){
     return response.render("users" , {
         title:"Codeial | Profile"
@@ -61,3 +62,4 @@ module.exports.destroySession = function(request , response){
     request.logOut();
     return response.redirect("/");
 }
+

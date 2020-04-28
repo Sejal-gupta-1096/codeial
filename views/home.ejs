@@ -1,5 +1,26 @@
 <main>
         <h1>Codeial / Home</h1>
+
+        <section>
+                <form action="/posts/add-post" method="POST">
+                        <textarea name="content" rows="3" cols="30" placeholder="Type Here.."></textarea>
+                        <input type="submit" value="Post">
+                </form>
+        </section>
+
+        <section id="posts-container">
+                <ul>
+                        <% for(i of posts){ %>
+                                <li> <%= i.content %></li>
+                                <small> <%= i.user.name %></small>
+                                <!-- <small>
+                                        This we are using for the authenticated user but we have to show all the posts by all the other users also so we will populate the user from userid
+                                        <%= user.name %></small> -->
+                        <% } %>
+                </ul>
+                
+
+        </section>
 </main>
         
       

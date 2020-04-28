@@ -60,10 +60,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+
 //4) Acquiring Router Middleware
 app.use("/",require("./routes/index"));
-
-
 
 
 
