@@ -1,7 +1,9 @@
-<header>
-    <h1>Page Header</h1>
 
+<link rel="stylesheet" type="text/css" href="/css/header.css">
+<header>
+    <div id="logo"><h2>Codeial</h2></div>
     <% if(locals.user){ %>
+        <div id="auth">
         <ul>
             <li>
                 <%= user.name %>
@@ -10,7 +12,9 @@
                 <a href="/users/sign-out">Sign Out</a>
             </li>
         </ul>
+    </div>
     <% }else{ %>
+        <div id="auth">
         <ul>
             <li>
                 <a href="/users/sign-up">Sign Up</a>
@@ -19,5 +23,6 @@
                 <a href="/users/sign-in">Sign In</a>
             </li>
         </ul>
+        </div>
     <% } %>
 </header>

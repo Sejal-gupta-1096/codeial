@@ -13,12 +13,25 @@ const db = require("./config/mongoose");
 
 //11)Using cookies
 const cookieParser = require("cookie-parser");
+
 //12)Using express session for session cookie
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 
+//13)Permanantly storing session in db
 const MongoStore = require("connect-mongo")(session);
+
+//14)Using sass
+var sassMiddleware = require('node-sass-middleware');
+
+app.use(sassMiddleware({
+    src: "./assets/scss",
+    dest: "./assets/css",
+    debug: true,
+    outputStyle: 'extended',
+    prefix:  '/css'  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+}));
 
 //10)Setting middleware for decoding the post request
 app.use(express.urlencoded());
@@ -49,6 +62,10 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 //4) Acquiring Router Middleware
 app.use("/",require("./routes/index"));
+
+
+
+
 
 //7)Linking static files
 app.use(express.static("./assets"));

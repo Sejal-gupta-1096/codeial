@@ -1,4 +1,5 @@
-body{
-    background-color: brown;
-    text-align: center;
-}
+body {
+  margin: 0; }
+
+main {
+  height: 100%; }
