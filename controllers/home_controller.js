@@ -3,7 +3,12 @@ const Posts = require("../models/posts");
 module.exports.home = function(request , response){
     // console.log(request.cookies);
     // response.cookie("user_id" , 19);
-    Posts.find({}).populate("user").exec(function(error , posts){
+    Posts.find({}).populate("user").populate({
+        path : "comments",
+        populate : {
+            path : "user"
+        }
+    }).exec(function(error , posts){
         if(error){
             console.log("error in finding posts");
             return;

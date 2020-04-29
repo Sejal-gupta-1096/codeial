@@ -9,6 +9,8 @@ router.get("/" , homeController.home);
  //4)Handling /user request by first requiring users module and then firing the request asked (/user/request)
  router.use("/users" , require("./users"));
  router.use("/posts" , require("./posts"));
+ router.use("/comments" , require("./comments"));
+ 
 
 //2)Exporting the router module
 module.exports = router;

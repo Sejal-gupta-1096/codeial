@@ -8,7 +8,13 @@ const postsSchema = new mongoose.Schema({
     user : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "Users"
-    }
+    } , 
+    comments :[
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "Comments"
+        }
+    ]
 } , {
     timestamps : true
 })
