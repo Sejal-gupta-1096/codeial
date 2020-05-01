@@ -6,7 +6,8 @@ const passport = require("passport");
 //2)Handling /users/profile request by firing usersController
 const usersController = require("../controllers/users_controller");
 
-router.get("/profile" , passport.checkAuthentication , usersController.profile);
+router.get("/profile/:id" , passport.checkAuthentication , usersController.profile);
+router.post("/update/:id" , passport.checkAuthentication , usersController.update);
 
 //3)Handling /users/sign-up ans sign-in request
 router.get("/sign-up" , usersController.sign_up);

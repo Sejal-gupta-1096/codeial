@@ -1,0 +1,7 @@
+<li>
+    <% if(locals.user && locals.user.id == comment.user.id){ %>
+            <a href="/comments/delete-comment/<%= comment._id %>"><i class="fas fa-window-close"></i></a>
+    <% } %>
+     
+     <%= comment.content %>
+    <%= comment.user.name %></li>

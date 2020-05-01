@@ -1,0 +1,11 @@
+main{
+    display: flex;
+    flex-direction: row;
+    #feed-container{
+        width: 70%;
+        border-right: 1px solid lightgrey;
+    }
+    #user-friends{
+        width: 30%;
+    }
+}

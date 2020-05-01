@@ -3,11 +3,24 @@ const Users = require("../models/users");
 
 
 module.exports.profile = function(request , response){
-    return response.render("users" , {
-        title:"Codeial | Profile"
-    });
+    Users.findById(request.params.id , function(error , user){
+        return response.render("users" , {
+            title:"Codeial | Profile",
+            profile_user : user
+        });
+    })
+    
 }
 
+module.exports.update = function(request , response){
+    if(request.user.id == request.params.id){
+        Users.findByIdAndUpdate(request.params.id , request.body , function(error , user){
+            return response.redirect("back");
+        })
+    }else{
+        return response.status(401).send("Unauthorized");
+    }
+}
 module.exports.sign_up = function(request , response){
 
     if(request.isAuthenticated()){
