@@ -6,15 +6,15 @@
                 <h1>Codeial / Home</h1>
                 <section>
                         <% if(locals.user){ %>
-                        <form action="/posts/add-post" method="POST">
+                        <form id="post-form" action="/posts/add-post" method="POST">
                                 <textarea name="content" rows="3" cols="30" placeholder="Type Here.." required></textarea>
-                                <input type="submit" value="Post">
+                                <input type="submit" value="Post" onclick="createPost()">
                         </form>
                         <% } %>
                 </section>
         
                 <section id="posts-container">
-                        <ul>
+                        <ul id="posts-list">
                                 <% for(i of posts){ %>
                                         <%- include("_posts") -%>
                                         
@@ -35,4 +35,4 @@
                 <% } %>
         </aside>
 </main>
-        
+<script src="/javascript/home_posts.js"></script>

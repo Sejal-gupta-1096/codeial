@@ -25,6 +25,10 @@ const MongoStore = require("connect-mongo")(session);
 //14)Using sass
 var sassMiddleware = require('node-sass-middleware');
 
+const flash = require("connect-flash");
+const customMVare = require("./config/middleware");
+
+
 app.use(sassMiddleware({
     src: "./assets/scss",
     dest: "./assets/css",
@@ -38,7 +42,19 @@ app.use(express.urlencoded());
 
 app.use(cookieParser());
 
+//7)Linking static files
+app.use(express.static("./assets"));
+
+
 app.use(expressLayouts);
+
+//8)Extracting links and scripts from individual pages and place them in head
+app.set("layout extractStyles" ,true);
+app.set("layout extractScripts" ,true);
+
+//5)Setting up View Enjine
+app.set("view engine" , "ejs");
+app.set("views" , "./views");
 
 
 app.use(session({
@@ -61,22 +77,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
+app.use(flash());
+app.use(customMVare.setFlash);
+
 //4) Acquiring Router Middleware
 app.use("/",require("./routes/index"));
 
 
 
-//7)Linking static files
-app.use(express.static("./assets"));
 
-//8)Extracting links and scripts from individual pages and place them in head
-app.set("layout extractStyles" ,true);
-app.set("layout extractScripts" ,true);
-
-
-//5)Setting up View Enjine
-app.set("view engine" , "ejs");
-app.set("views" , "./views");
 
 //3)Running ther server on defined port
 app.listen(port , function(error){
