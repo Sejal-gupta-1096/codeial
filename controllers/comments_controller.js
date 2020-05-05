@@ -20,7 +20,7 @@ module.exports.addComment = async function(request , response){
                 if(request.xhr){
                     return response.status(200).json({
                         comment : comment , 
-                        message : "Comment Deleted"
+                        message : "Comment Added Successfully"
                     })
                 }
                 request.flash("successs" , "Comment Added Successfully");
@@ -49,7 +49,7 @@ module.exports.deleteComment = async function(request , response){
                     if(request.xhr){
                         return response.status(200).json({
                             comment_id : request.params.id , 
-                            message : "Post Deleted"
+                            message : "Comment Delted Successfully"
                         });
                     }
                     //return response.redirect("back");

@@ -16,6 +16,7 @@ let createPost = function(){
                     deletePost($(this));
                 });
                 $("#posts-list").prepend(newPost);
+                notifications('success',data.message);
             },
             error : function(error){
                 console.log(error.responseText);
@@ -60,6 +61,7 @@ let deletePost = function(deleteLink){
             url : $(deleteLink).prop("href"),
             success : function(data){
                 $(`#post-${data.post_id}`).remove();
+                notifications('success',data.message);
             },
             error : function(error){
                 console.log(error.responseText);
@@ -67,5 +69,13 @@ let deletePost = function(deleteLink){
         });
     }
 
-
+    let notifications = function(type,text){
+                new Noty({
+                    theme: 'relax',
+                    text: text,
+                    type: type,
+                    layout: 'topRight',
+                    timeout: 1000
+                }).show();
+            }
 createPost();

@@ -22,6 +22,7 @@ let createComment = function(){
                      $(' a',newComment).click(function(){
                         deleteComment($(this));
                     });
+                    notifications('success',data.message);
                    
                 },
                 error : function(error){
@@ -55,6 +56,7 @@ let createComment = function(){
                 console.log(data)
                 console.log($(`#comment-id-${data.comment_id}`))
                 $(`#comment-id-${data.comment_id}`).remove();
+                notifications('success',data.message);
             },
             error : function(error){
                 console.log(error.responseText);
