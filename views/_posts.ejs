@@ -8,15 +8,15 @@
 
 <div class="posts-comments">
     <% if(locals.user){ %>
-            <form id="comment-form" action="/comments/add-comment" method="POST">
+            <form class="comments-form" action="/comments/add-comment" method="POST">
             <input type="text" name="content" required>
             <input type="hidden" name="post" value="<%= i._id %>">
-            <input type="submit" value="Add Comment" onclick="createComment()">
+            <input type="submit" value="Add Comment" >
             </form>
     <% } %>
 </div>
 <div class="post-comments-list">
-    <ul id="comments-list">
+    <ul id="comments-list-id-<%= i._id %>">
             <% for(comment of i.comments){ %>
                    <%- include("_comments") -%>
             <% } %>

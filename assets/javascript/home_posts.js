@@ -1,8 +1,9 @@
 //Submitting data via AJAX
 
 let createPost = function(){
-    event.preventDefault();   // Which event is this referering to?
     let postForm = $("#post-form");
+    postForm.submit(function(){
+        event.preventDefault();
 
         $.ajax({
             type : "POST",
@@ -11,8 +12,9 @@ let createPost = function(){
             success : function(data){
                 console.log("data Posted",data.post);
                 let newPost = newPostToBePrepended(data.post);
-                let aNewPost = $('a',$(newPost))[0];
-                $(aNewPost).click(deletePost(aNewPost));
+                $(' a',newPost).click(function(){
+                    deletePost($(this));
+                });
                 $("#posts-list").prepend(newPost);
             },
             error : function(error){
@@ -20,11 +22,13 @@ let createPost = function(){
             }
                 
             })
+    })
+       
         }
 
 //New Post Added to be displayed in View
 let newPostToBePrepended = function(post){
-    return `<li>  
+    return $(`<li id="post-${post._id}">
                 <a href="/posts/delete-post/${post._id }"><i class="fas fa-window-close"></i></a>
                 ${ post.content }
                 <small> ${ post.user.name }</small>
@@ -43,14 +47,14 @@ let newPostToBePrepended = function(post){
                 </ul>
 
                 </div>
-            </li>`;
+            </li>`);
 }
 
 let deletePost = function(deleteLink){
         console.log(deleteLink);
+        //console.log(this);
         console.log($(deleteLink).prop("href"));
         event.preventDefault();
-        console.log($(`#post-${data.post_id}`));
         $.ajax({
             type : "get",
             url : $(deleteLink).prop("href"),
@@ -64,41 +68,4 @@ let deletePost = function(deleteLink){
     }
 
 
-//Comments added Via AJAX
-
-let createComment = function(){
-    console.log("Hiii")
-    event.preventDefault();
-    let CommentForm = $("#comment-form");
-    //commentForm.submit(function(event){
-       
-
-        $.ajax({
-            type : "POST",
-            url : "/comments/add-comment",
-            data : commentForm.serialize(),
-            success : function(data){
-                console.log(data);
-                let newComment = newCommentToBePrepended(data.comment);
-                 $("#comments-list").prepend(newComment);
-            },
-            error : function(error){
-                console.log(error.responseText);
-            }
-                
-            })
-        }
-        //)
-    //}
-
-    let newCommentToBePrepended = function(comment){
-        return $(`<li>
-                    <a href="/comments/delete-comment/<%= comment._id %>"><i class="fas fa-window-close"></i></a>
-            
-                    ${ comment.content }
-                    ${ comment.user.name }
-                </li>`
-    );
-    }
-
-    
+createPost();

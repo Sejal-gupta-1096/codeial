@@ -8,7 +8,7 @@
                         <% if(locals.user){ %>
                         <form id="post-form" action="/posts/add-post" method="POST">
                                 <textarea name="content" rows="3" cols="30" placeholder="Type Here.." required></textarea>
-                                <input type="submit" value="Post" onclick="createPost()">
+                                <input type="submit" value="Post">
                         </form>
                         <% } %>
                 </section>
@@ -35,4 +35,8 @@
                 <% } %>
         </aside>
 </main>
+<script>
+        console.log(this);
+</script>
 <script src="/javascript/home_posts.js"></script>
+<script src="/javascript/posts_comments.js"></script>

@@ -13,13 +13,14 @@ module.exports.addComment = async function(request , response){
                 user : request.user._id
             })
 
+            comment = await comment.populate('user','name').execPopulate();
                 post.comments.push(comment);
                 post.save();
 
                 if(request.xhr){
                     return response.status(200).json({
                         comment : comment , 
-                        message : "Post Deleted"
+                        message : "Comment Deleted"
                     })
                 }
                 request.flash("successs" , "Comment Added Successfully");
@@ -44,7 +45,14 @@ module.exports.deleteComment = async function(request , response){
                 comment.remove();
                 Posts.findByIdAndUpdate(postId , { $pull : {comments : request.params.id}} , function(error , post){
                     request.flash("successs" , "Comment Delted Successfully");
-                    return response.redirect("back");
+
+                    if(request.xhr){
+                        return response.status(200).json({
+                            comment_id : request.params.id , 
+                            message : "Post Deleted"
+                        });
+                    }
+                    //return response.redirect("back");
                 })
             }
         }else{
