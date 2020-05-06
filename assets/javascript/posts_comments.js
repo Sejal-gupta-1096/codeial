@@ -1,6 +1,7 @@
 //Comments added Via AJAX
 
 
+
 let createComment = function(){
     let commentsForm = $(".comments-form");
     console.log(commentsForm);

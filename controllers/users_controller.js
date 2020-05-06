@@ -1,6 +1,7 @@
 
 const Users = require("../models/users");
-
+const fs = require("fs");
+const path = require("path");
 
 module.exports.profile = async function(request , response){
 
@@ -23,9 +24,31 @@ module.exports.update = async function(request , response){
 
     try{
         if(request.user.id == request.params.id){
-            let user = await Users.findByIdAndUpdate(request.params.id , request.body);
-    
+            //let user = await Users.findByIdAndUpdate(request.params.id , request.body);
+            let user = await Users.findById(request.params.id);
+            Users.uploadedAvtar(request , response , function(error){
+                if(error){
+                    console.log("error");
+                    return;
+                }
+
+                console.log(request.file);
+
+                user.name = request.body.name;
+                user.email = request.body.email;
+
+                
+                if(request.file){
+                    if(user.avtar && fs.existsSync(path.join(__dirname , ".." , user.avtar))){
+                        fs.unlinkSync(path.join(__dirname , ".." , user.avtar));
+                    }
+                    user.avtar = Users.avtarPath + "/" + request.file.filename;
+                }
+                
+                user.save();
                 return response.redirect("back");
+            });
+                
         }else{
             return response.status(401).send("Unauthorized");
         }

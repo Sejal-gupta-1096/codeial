@@ -81,6 +81,7 @@ app.use(flash());
 app.use(customMVare.setFlash);
 
 //4) Acquiring Router Middleware
+app.use("/uploads" , express.static(__dirname + "/uploads"));
 app.use("/",require("./routes/index"));
 
 

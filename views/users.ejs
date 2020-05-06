@@ -2,11 +2,13 @@
 
         <main>
                 <h1>Codeial / Profile</h1>
+                <img id="img" src="<%= user.avtar %>" width="20%">
                 
                 <% if(user.id == profile_user.id){ %>
-                        <form action="/users/update/<%= profile_user.id %>" method="POST">
+                        <form id="update-form" action="/users/update/<%= profile_user.id %>" method="POST" enctype="multipart/form-data">
                                 <input type="text" name="name" placeholder="Your Name" required>
                                 <input type="text" name="email" placeholder="Your Email" required>
+                                <input id="change-avtar" type="file" name="avtar" placeholder="Profile Picture">
                                 <input type="submit" value="Update">
                         </form>
                 <% }else{ %>
@@ -14,4 +16,4 @@
                        <p><%= profile_user.email %></p>
                 <% } %>
         </main>
-     
+<script type="text/javascript" src="/javascript/user_image_preview.js"></script>

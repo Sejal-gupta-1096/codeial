@@ -78,4 +78,6 @@ let deletePost = function(deleteLink){
                     timeout: 1000
                 }).show();
             }
-createPost();
+
+
+            createPost()

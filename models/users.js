@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const multer = require("multer");
+const path = require("path");
+const AVTAR_PATH = path.join("/uploads/users/avtars");
 
 const userSchema = new mongoose.Schema({
     email : {
@@ -13,11 +16,27 @@ const userSchema = new mongoose.Schema({
     name : {
         type:String,
         required:true
+    },
+    avtar : {
+        type : String
     }
 } , {
     timestamps : true
 });
 
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname , ".." , AVTAR_PATH));
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now())
+    }
+  })
+
+  userSchema.statics.uploadedAvtar = multer({ storage: storage }).single("avtar");
+  userSchema.statics.avtarPath = AVTAR_PATH;
+  
 const Users = mongoose.model("Users" , userSchema);
 
 module.exports = Users;
