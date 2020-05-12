@@ -5,6 +5,12 @@
      
     <%= i.content %>
 <small> <%= i.user.name %></small>
+<% if(locals.user){ %>
+    <a data-likes="<%= i.likes.length %>" class="toggle-btn" href="/likes/toggle/?id=<%= i._id %>&type=Posts"><%= i.likes.length %> Likes</a>
+<% }else{ %>
+    <small><%= i.likes.length %> Likes</small>
+<% } %>
+
 
 <div class="posts-comments">
     <% if(locals.user){ %>

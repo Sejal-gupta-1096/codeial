@@ -38,8 +38,12 @@ module.exports.home = async function(request , response){
             path : "comments",
             populate : {
                 path : "user"
+            },
+            populate : {
+                path : "likes"
             }
-        })
+
+        }).populate("likes");
     
         let users = await User.find({});
 

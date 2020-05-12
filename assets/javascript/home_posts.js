@@ -4,7 +4,6 @@ let createPost = function(){
     let postForm = $("#post-form");
     postForm.submit(function(){
         event.preventDefault();
-
         $.ajax({
             type : "POST",
             url : "/posts/add-post",
@@ -17,6 +16,7 @@ let createPost = function(){
                 });
                 $("#posts-list").prepend(newPost);
                 notifications('success',data.message);
+                toggleLike();
             },
             error : function(error){
                 console.log(error.responseText);
@@ -33,7 +33,7 @@ let newPostToBePrepended = function(post){
                 <a href="/posts/delete-post/${post._id }"><i class="fas fa-window-close"></i></a>
                 ${ post.content }
                 <small> ${ post.user.name }</small>
-
+                <a data-likes="0" class="toggle-btn" href="/likes/toggle/?id=${post._id}&type=Posts">${post.likes.length} Likes</a>
                 <div class="posts-comments">
                 
                         <form action="/comments/add-comment" method="POST">

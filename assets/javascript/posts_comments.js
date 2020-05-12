@@ -11,7 +11,7 @@ let createComment = function(){
             event.preventDefault();
 
             $.ajax({
-                type : "POST",
+                type : "GET",
                 url : "/comments/add-comment",
                 data : form.serialize(),
                 success : function(data){
@@ -24,6 +24,7 @@ let createComment = function(){
                         deleteComment($(this));
                     });
                     notifications('success',data.message);
+                    toggleLike();
                    
                 },
                 error : function(error){
@@ -37,10 +38,11 @@ let createComment = function(){
       
     let newCommentToBePrepended = function(comment){
         return $(`<li id="comment-id-${comment._id }">
-                    <a href="/comments/delete-comment/${ comment._id }"><i class="fas fa-window-close"></i></a>
+                    <a data-likes="0" class="toggle-btn" href="/comments/delete-comment/${ comment._id }"><i class="fas fa-window-close"></i></a>
             
                     ${ comment.content }
                     ${ comment.user.name }
+                    <a href="/likes/toggle/?id=${comment._id }&type=Comments">${comment.likes.length} Likes</a>
                 </li>`
     );
     }
