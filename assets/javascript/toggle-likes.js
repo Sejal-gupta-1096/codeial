@@ -1,11 +1,12 @@
-function toggleLike(){
-       $(".toggle-btn").click(function(){
-           event.preventDefault();
+function toggleLike(toggleBtn){
+    console.log(toggleBtn);
+    $(toggleBtn).click(function(event){
+        event.preventDefault();
         $.ajax({
-            type : "POST",
-            url : $(this).attr("href"),
+            type : "GET",
+            url : $(toggleBtn).attr("href"),
             success : function(data){
-                let likesCount = parseInt($(this).attr("data-likes"));
+                let likesCount = $(toggleBtn).attr("data-likes");
                 console.log(likesCount);
                 console.log(data);
                 if(data.deleted){
@@ -14,8 +15,8 @@ function toggleLike(){
                     likesCount++;
                 }
                 
-                $(this).attr("data-likes" , likesCount);
-                $(this).html(`${likesCount} Likes`)
+                $(toggleBtn).attr("data-likes" , likesCount);
+                $(toggleBtn).html(`${likesCount} Likes`)
             },
             error : function(error){
                 console.log(error.responseText);
@@ -25,11 +26,12 @@ function toggleLike(){
             })
 
        })
-        
+    }   
 
-        
-       
-        }
 
-        toggleLike();
+    $('.toggle-btn').each(function(){
+        toggleLike($(this));
+    });
+
+
 

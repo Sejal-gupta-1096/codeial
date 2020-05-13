@@ -11,12 +11,12 @@ let createPost = function(){
             success : function(data){
                 console.log("data Posted",data.post);
                 let newPost = newPostToBePrepended(data.post);
-                $(' a',newPost).click(function(){
-                    deletePost($(this));
-                });
+                console.log(newPost);
+                console.log($(' .delete-post-btn',newPost));
+                deletePost($(' .delete-post-btn',newPost));
+                toggleLike($(' .toggle-btn',newPost));
                 $("#posts-list").prepend(newPost);
                 notifications('success',data.message);
-                toggleLike();
             },
             error : function(error){
                 console.log(error.responseText);
@@ -30,7 +30,7 @@ let createPost = function(){
 //New Post Added to be displayed in View
 let newPostToBePrepended = function(post){
     return $(`<li id="post-${post._id}">
-                <a href="/posts/delete-post/${post._id }"><i class="fas fa-window-close"></i></a>
+                <a class="delete-post-btn" href="/posts/delete-post/${post._id }"><i class="fas fa-window-close"></i></a>
                 ${ post.content }
                 <small> ${ post.user.name }</small>
                 <a data-likes="0" class="toggle-btn" href="/likes/toggle/?id=${post._id}&type=Posts">${post.likes.length} Likes</a>
@@ -53,8 +53,8 @@ let newPostToBePrepended = function(post){
 
 let deletePost = function(deleteLink){
         console.log(deleteLink);
-        //console.log(this);
-        console.log($(deleteLink).prop("href"));
+        $(deleteLink).click(function(event){
+            console.log($(deleteLink).prop("href"));
         event.preventDefault();
         $.ajax({
             type : "get",
@@ -68,6 +68,14 @@ let deletePost = function(deleteLink){
             }
         });
     }
+)
+}
+
+//Method to loop over previously created Post and call DeletePost on it
+
+    $('#posts-list>li').each(function(){
+        deletePost($(' .delete-post-btn',$(this)));
+    });
 
     let notifications = function(type,text){
                 new Noty({
@@ -80,4 +88,4 @@ let deletePost = function(deleteLink){
             }
 
 
-            createPost()
+createPost()

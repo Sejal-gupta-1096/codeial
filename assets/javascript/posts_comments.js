@@ -6,12 +6,13 @@ let createComment = function(){
     let commentsForm = $(".comments-form");
     console.log(commentsForm);
     commentsForm.each(function(){
+        console.log($(this));
         let form = $(this);
         form.submit(function(){
             event.preventDefault();
 
             $.ajax({
-                type : "GET",
+                type : "POST",
                 url : "/comments/add-comment",
                 data : form.serialize(),
                 success : function(data){
@@ -19,10 +20,8 @@ let createComment = function(){
                     let newComment = newCommentToBePrepended(data.comment);
                     console.log($(`#comments-list-id-${data.comment.post}`))
                     $(`#comments-list-id-${data.comment.post}`).prepend(newComment);
-
-                     $(' a',newComment).click(function(){
-                        deleteComment($(this));
-                    });
+                    deleteComment($(" .delete-comment-btn" ,newComment));
+                    toggleLike($(' .toggle-btn',newComment));
                     notifications('success',data.message);
                     toggleLike();
                    
@@ -38,11 +37,11 @@ let createComment = function(){
       
     let newCommentToBePrepended = function(comment){
         return $(`<li id="comment-id-${comment._id }">
-                    <a data-likes="0" class="toggle-btn" href="/comments/delete-comment/${ comment._id }"><i class="fas fa-window-close"></i></a>
+                    <a class="delete-comment-btn" href="/comments/delete-comment/${ comment._id }"><i class="fas fa-window-close"></i></a>
             
                     ${ comment.content }
                     ${ comment.user.name }
-                    <a href="/likes/toggle/?id=${comment._id }&type=Comments">${comment.likes.length} Likes</a>
+                    <a data-likes="0" class="toggle-btn" href="/likes/toggle/?id=${comment._id }&type=Comments">${comment.likes.length} Likes</a>
                 </li>`
     );
     }
@@ -50,8 +49,9 @@ let createComment = function(){
 
     let deleteComment = function(deleteLink){
         console.log(deleteLink);
-        console.log($(deleteLink).prop("href"));
-        event.preventDefault();
+        $(deleteLink).click(function(event){
+
+            event.preventDefault();
         $.ajax({
             type : "get",
             url : $(deleteLink).prop("href"),
@@ -62,10 +62,17 @@ let createComment = function(){
                 notifications('success',data.message);
             },
             error : function(error){
-                console.log(error.responseText);
+                console.log("Error:",error.responseText);
             }
         });
+
+        })
+        
     }
+
+    $(' .post-comments-list>ul li').each(function(){
+        deleteComment($(' .delete-comment-btn',$(this)));
+    });
 
     
 createComment();

@@ -1,6 +1,6 @@
 <li id="post-<%= i._id %>">  
     <% if(locals.user && locals.user.id == i.user.id){%>
-            <a onclick="deletePost(this)" href="/posts/delete-post/<%= i._id %>"><i class="fas fa-window-close"></i></a>
+            <a class="delete-post-btn" href="/posts/delete-post/<%= i._id %>"><i class="fas fa-window-close"></i></a>
     <% } %>
      
     <%= i.content %>

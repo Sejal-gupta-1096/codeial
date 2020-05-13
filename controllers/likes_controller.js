@@ -44,10 +44,11 @@ module.exports.toggleLike = async function(request , response){
             });
         }
 
-            return response.json(200 ,  {
-                deleted : deleted ,
-                message : "Request Successful"
-            })
+            // return response.json(200 ,  {
+            //     deleted : deleted ,
+            //     message : "Request Successful"
+            // })
+        return response.redirect('back');
             
     }catch(error){
 

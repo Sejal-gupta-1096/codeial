@@ -34,7 +34,7 @@ module.exports.deletePost = async function(request , response){
 
     try{
         let post = await Posts.findById(request.params.id);
-
+        console.log(post);
         if(post.user == request.user.id){
 
             await Likes.deleteMany({likeable : post, onModel : "Posts"});

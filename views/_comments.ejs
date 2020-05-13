@@ -1,12 +1,12 @@
 <li id="comment-id-<%= comment._id %>">
     <% if(locals.user && locals.user.id == comment.user._id){ %>
-            <a onclick="deleteComment(this)" href="/comments/delete-comment/<%= comment._id %>"><i class="fas fa-window-close"></i></a>
+            <a class="delete-comment-btn" href="/comments/delete-comment/<%= comment._id %>"><i class="fas fa-window-close"></i></a>
     <% } %>
      
      <%= comment.content %>
     <%= comment.user.name %>
     <% if(locals.user){ %>
-        <a href="/likes/toggle/?id=<%= comment._id %>&type=Comments"><%= comment.likes.length %> Likes</a>
+        <a data-likes="<%= comment.likes.length %>" class="toggle-btn" href="/likes/toggle/?id=<%= comment._id %>&type=Comments"><%= comment.likes.length %> Likes</a>
     <% }else{ %>
         <small><%= comment.likes.length %> Likes</small>
     <% } %>
