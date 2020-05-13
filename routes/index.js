@@ -12,7 +12,7 @@ router.get("/" , homeController.home);
  router.use("/comments" , require("./comments"));
  router.use("/api" , require("./api"));
  router.use("/likes" , require("./likes"));
- 
+ router.use("/friends" , require("./friends"));
 
 //2)Exporting the router module
 module.exports = router;

@@ -2,6 +2,7 @@
 <script src="https://kit.fontawesome.com/90f89e9e87.js" crossorigin="anonymous"></script>
 
 <main>
+        <div id="block"></div>
         <div id="feed-container">
                 <h1>Codeial / Home</h1>
                 <section>
@@ -25,14 +26,20 @@
                 </section>
         </div>
         
-        <aside id="user-friends">
-                <h4>Friends</h4>
-                <% for(u of all_users){ %>
-                        <p>
-                                <a href="/users/profile/<%= u.id %>">
-                                <%= u.name %></a>
-                        </p>
-                <% } %>
+        <aside>
+                <div id="users-list">
+                        <h4>Users</h4>
+                        <% for(u of all_users){ %>
+                                <p>
+                                        <a href="/users/profile/<%= u.id %>">
+                                        <%= u.name %></a>
+                                </p>
+                        <% } %>
+                </div>
+                <div id="friends-list">
+                        <h4>Friends</h4>
+                </div>
+                
         </aside>
 </main>
 <script>

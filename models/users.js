@@ -19,7 +19,13 @@ const userSchema = new mongoose.Schema({
     },
     avtar : {
         type : String
-    }
+    },
+    friends : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "Users"
+        }
+    ]
 } , {
     timestamps : true
 });

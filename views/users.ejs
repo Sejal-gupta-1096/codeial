@@ -14,6 +14,7 @@
                 <% }else{ %>
                        <p><%= profile_user.name %></p>
                        <p><%= profile_user.email %></p>
+                       <a href="/friends/add-friend/?id=<%= profile_user.id %>">Add Friend</a>
                 <% } %>
         </main>
 <script type="text/javascript" src="/javascript/user_image_preview.js"></script>
