@@ -115,6 +115,6 @@ module.exports.createSession = function(request , response){
 module.exports.destroySession = function(request , response){
     request.logOut();
     request.flash("success" , "You have signed out");
-    return response.redirect("/");
+    return response.redirect("/users/sign-in");
 }
 

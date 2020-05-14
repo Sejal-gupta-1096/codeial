@@ -36,9 +36,17 @@
                                 </p>
                         <% } %>
                 </div>
-                <div id="friends-list">
-                        <h4>Friends</h4>
-                </div>
+                <% if(locals.user) { %>
+                        <div id="friends-list">
+                                <h4>Friends</h4>
+                                <% for(friends of user2.friends){ %>
+                                        <% if(locals.user._id != user2.friends._id){ %>
+                                               <p><%= friends.name %></p> 
+                                        <% } %>
+                                <% } %>
+                        </div>
+                <% } %> 
+                
                 
         </aside>
 </main>

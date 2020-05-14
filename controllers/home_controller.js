@@ -1,6 +1,6 @@
 const Posts = require("../models/posts");
 const User = require("../models/users");
-
+const passport = require("../config/passport-local-strategy");
 
 // module.exports.home = function(request , response){
 //     // console.log(request.cookies);
@@ -44,13 +44,20 @@ module.exports.home = async function(request , response){
             }
 
         }).populate("likes");
-    
         let users = await User.find({});
+
+        
+            let user = await User.findById(request.user._id , function(error , user){
+                console.log("User :" , user);
+            }).populate("friends");
+        
+       
 
          return response.render("home" , {
             title:"Codeial | Home",
             posts : posts,
-            all_users : users
+            all_users : users,
+            user2 : user
          });
 
     }catch(error){
