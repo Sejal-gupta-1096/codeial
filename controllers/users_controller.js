@@ -82,14 +82,15 @@ module.exports.sign_in = function(request , response){
     });
 }
 
+//Creating new user
 module.exports.create_user = async function(request , response){
 
     try{
-        
+        //checking for pwd and confirm pwd
         if(request.body.password != request.body.confirm_password){
             return response.redirect("back");
         }
-    
+    //if user already exist then redirect else create new user
         let user = await  Users.findOne({email:request.body.email}); 
     
             if(user){

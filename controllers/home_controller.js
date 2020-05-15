@@ -46,10 +46,15 @@ module.exports.home = async function(request , response){
         }).populate("likes");
         let users = await User.find({});
 
-        
-            let user = await User.findById(request.user._id , function(error , user){
+        let user;
+        if(request.user){
+             user = await User.findById(request.user._id , function(error , user){
                 console.log("User :" , user);
             }).populate("friends");
+        }else{
+            
+        }
+            
         
        
 
@@ -58,6 +63,7 @@ module.exports.home = async function(request , response){
             posts : posts,
             all_users : users,
             user2 : user
+            
          });
 
     }catch(error){

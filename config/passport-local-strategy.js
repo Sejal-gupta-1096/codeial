@@ -1,3 +1,5 @@
+//This file will get executed when passport.authenticate is called (if user found then the referred controller is called else failure redirect)
+
 //1)Require passport and strategy
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -8,6 +10,8 @@ const User = require("../models/users");
 passport.use(new LocalStrategy({
     usernameField : "email",
     passReqToCallback : true
+    
+    //This request,email,password are passed by the request data that is send from browser
 } , function(request , email , password , done){
     //3)find the user 
     User.findOne({email : email} , function(error , user){
@@ -25,7 +29,7 @@ passport.use(new LocalStrategy({
     })
 }))
 
-//Serializing the user or encrypting the key passed in cookie
+//Creating a session cookie via express session
 passport.serializeUser(function(user , done){
     done(null , user._id);
 })
@@ -41,7 +45,7 @@ passport.deserializeUser(function(id , done){
     })
 })
 
-//This is check for the request (other than sign-in) made by browser to the server if is authenticated or not
+//This is check for the request made by browser to the server for pages like profile and update that if is authenticated or not
 passport.checkAuthentication = function(request , response , next){
     if(request.isAuthenticated()){
         return next();

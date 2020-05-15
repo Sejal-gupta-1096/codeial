@@ -8,21 +8,23 @@ const port = 100;
 //6) Installing and acquiring express-ejs-layouts
 const expressLayouts = require("express-ejs-layouts");
 
-//9)Connecting to database
+//9)Setting configuration for mongoose in config folder and requiring here (Connecting to database)
 const db = require("./config/mongoose");
 
 //11)Using cookies
 const cookieParser = require("cookie-parser");
 
-//12)Using express session for session cookie
+//12)Using passport for authentication and express session for session cookie
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
+
 //15)Using Passport JWT
 const passportJWT = require("./config/passport-jwt-strategy");
 
 //16)Google OAuth SignIn/SignUp
 const passportGoogle = require("./config/passport-google-oauth2-strategy");
+
 //13)Permanantly storing session in db
 const MongoStore = require("connect-mongo")(session);
 
@@ -44,6 +46,7 @@ app.use(sassMiddleware({
 //10)Setting middleware for decoding the post request
 app.use(express.urlencoded());
 
+//After requiring cookies we have to use this middleware for using cookies
 app.use(cookieParser());
 
 //7)Linking static files
@@ -60,7 +63,7 @@ app.set("layout extractScripts" ,true);
 app.set("view engine" , "ejs");
 app.set("views" , "./views");
 
-
+//using express session to encrypt user data and stores in the cookie (This cookie is then stored in database)
 app.use(session({
     name : "codeial",
     secret : "somethingsomething" , 
@@ -77,15 +80,20 @@ app.use(session({
     })
 }))
 
+//initialising passport and using session
 app.use(passport.initialize());
 app.use(passport.session());
+
+//setting user to locals of response
 app.use(passport.setAuthenticatedUser);
 
 app.use(flash());
 app.use(customMVare.setFlash);
 
-//4) Acquiring Router Middleware
+
 app.use("/uploads" , express.static(__dirname + "/uploads"));
+
+//4) Acquiring Router Middleware
 app.use("/",require("./routes/index"));
 
 
