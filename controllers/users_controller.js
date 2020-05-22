@@ -24,7 +24,6 @@ module.exports.update = async function(request , response){
 
     try{
         if(request.user.id == request.params.id){
-            //let user = await Users.findByIdAndUpdate(request.params.id , request.body);
             let user = await Users.findById(request.params.id);
             Users.uploadedAvtar(request , response , function(error){
                 if(error){
@@ -37,11 +36,13 @@ module.exports.update = async function(request , response){
                 user.name = request.body.name;
                 user.email = request.body.email;
 
-                
+                //if file is present
                 if(request.file){
+                    //if already image is there then unlink that file
                     if(user.avtar && fs.existsSync(path.join(__dirname , ".." , user.avtar))){
                         fs.unlinkSync(path.join(__dirname , ".." , user.avtar));
                     }
+                    //and upload new file (replace old file with new file)
                     user.avtar = Users.avtarPath + "/" + request.file.filename;
                 }
                 
@@ -108,14 +109,16 @@ module.exports.create_user = async function(request , response){
 }
 
 module.exports.createSession = function(request , response){
-
+    console.log(request.user);
     request.flash("success" , "Logged In Successfully");
+    console.log(request.flash);
     return response.redirect("/");
 }
 
 module.exports.destroySession = function(request , response){
     request.logOut();
     request.flash("success" , "You have signed out");
+    console.log(request.flash);
     return response.redirect("/users/sign-in");
 }
 

@@ -23,14 +23,14 @@ const userSchema = new mongoose.Schema({
     friends : [
         {
             type : mongoose.Schema.Types.ObjectId,
-            ref : "Users"
+            ref : "Friendships"
         }
     ]
 } , {
     timestamps : true
 });
 
-
+//configuring multer
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, path.join(__dirname , ".." , AVTAR_PATH));

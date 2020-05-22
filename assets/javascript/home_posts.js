@@ -14,6 +14,7 @@ let createPost = function(){
                 console.log(newPost);
                 console.log($(' .delete-post-btn',newPost));
                 deletePost($(' .delete-post-btn',newPost));
+                createComment();
                 toggleLike($(' .toggle-btn',newPost));
                 $("#posts-list").prepend(newPost);
                 notifications('success',data.message);

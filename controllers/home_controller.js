@@ -48,21 +48,27 @@ module.exports.home = async function(request , response){
 
         let user;
         if(request.user){
-             user = await User.findById(request.user._id , function(error , user){
-                console.log("User :" , user);
-            }).populate("friends");
-        }else{
-            
+             user = await User.findById(request.user._id);
+             await user.populate({
+                 path : "friends",
+                 populate : {
+                    path : "from_user",
+                    path : "to_user"
+                }
+             }).execPopulate();
+
+             if(user.populated()){
+                console.log("Yess" , user)
+            }else{
+                console.log("No" , user)
+            }
         }
             
         
-       
-
          return response.render("home" , {
             title:"Codeial | Home",
             posts : posts,
             all_users : users,
-            user2 : user
             
          });
 

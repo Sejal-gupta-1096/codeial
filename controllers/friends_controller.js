@@ -1,18 +1,23 @@
 const Users = require("../models/users");
+const Friendships = require("../models/friendships");
 
-module.exports.addFriend = function(request , response){
-    Users.findById(request.user._id , function(error , user){
-        if(error){console.log("Error in finding user" , error);return}
+module.exports.addFriend = async function(request , response){
 
-        user.friends.push(request.query.id);
+    let friendship = await Friendships.create({
+        to_user : request.query.id,
+        from_user : request.user._id
+    });
+
+
+    let user = await Users.findById(request.user._id); 
+
+        user.friends.push(friendship);
         user.save();
 
-        Users.findById(request.query.id , function(error , user){
-            if(error){console.log("Error in finding user" , error);return}
-            user.friends.push(request.user._id);
-            user.save();
-        })
-    })
-    console.log(request.user);
-    return response.redirect("back");
+         user = await Users.findById(request.query.id); 
+
+        user.friends.push(friendship);
+        user.save();
+
+     return response.redirect("back");
 }

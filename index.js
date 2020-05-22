@@ -34,7 +34,21 @@ var sassMiddleware = require('node-sass-middleware');
 const flash = require("connect-flash");
 const customMVare = require("./config/middleware");
 
+//Setting up another server for chat engine and passing our app to it
+const chatServer = require("http").Server(app);
 
+//setting up configuation for setting sockets on the chat server
+const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
+
+chatServer.listen(200 , function(error){
+    if(error){
+        console.log("Error in setting up Chat Server");
+    }else{
+        console.log("Chat Server is listening on port 200");
+    }
+    
+})
+//setting config for using sass(it has to be written before the server starts so that it can compile all the sass files into css)
 app.use(sassMiddleware({
     src: "./assets/scss",
     dest: "./assets/css",

@@ -1,5 +1,4 @@
 <link type="text/css" rel="stylesheet" href="/css/home.css">
-<script src="https://kit.fontawesome.com/90f89e9e87.js" crossorigin="anonymous"></script>
 
 <main>
         <div id="block"></div>
@@ -39,20 +38,26 @@
                 <% if(locals.user) { %>
                         <div id="friends-list">
                                 <h4>Friends</h4>
-                                <% for(friends of user2.friends){ %>
-                                        <% if(locals.user._id != user2.friends._id){ %>
-                                               <p><%= friends.name %></p> 
-                                        <% } %>
-                                <% } %>
+                                <% for(friends of locals.user.friends){ %>
+                                       
+                                <% } %> 
                         </div>
                 <% } %> 
                 
-                
+               
         </aside>
+
+        <%- include("_chat_box") %>
 </main>
-<script>
-        console.log(this);
-</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="/javascript/chat_engine.js"></script>
+<% if(locals.user) {%>
+        <script>
+        new ChatEngine("user-chat-box" , "<%= locals.user.email %>");
+        </script>
+<% } %>
 <script src="/javascript/home_posts.js"></script>
 <script src="/javascript/posts_comments.js"></script>
 <script src="/javascript/toggle-likes.js"></script>
+

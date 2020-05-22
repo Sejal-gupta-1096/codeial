@@ -8,9 +8,8 @@ let createComment = function(){
     commentsForm.each(function(){
         console.log($(this));
         let form = $(this);
-        form.submit(function(){
+        form.submit(function(event){
             event.preventDefault();
-
             $.ajax({
                 type : "POST",
                 url : "/comments/add-comment",
