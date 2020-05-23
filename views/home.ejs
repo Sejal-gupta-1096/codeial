@@ -39,7 +39,14 @@
                         <div id="friends-list">
                                 <h4>Friends</h4>
                                 <% for(friends of locals.user.friends){ %>
-                                       
+                                      
+                                       <% if(friends.from_user.id == locals.user.id) {%>
+                                        <p><%= friends.to_user.name %></p>
+                                <%}%>
+                                <% if(friends.to_user.id == locals.user.id) {%>
+                                        <p><%= friends.from_user.name %></p>
+                                <% } %>   
+                                
                                 <% } %> 
                         </div>
                 <% } %> 

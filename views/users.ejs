@@ -14,7 +14,14 @@
                 <% }else{ %>
                        <p><%= profile_user.name %></p>
                        <p><%= profile_user.email %></p>
-                       <a href="/friends/add-friend/?id=<%= profile_user.id %>">Add Friend</a>
+                       <a class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
+                        <% if(locals.removeFriend){ %>
+                                Remove Friend
+                        <% }else{ %>
+                                Add Friend
+                        <% } %>
+                </a>
                 <% } %>
         </main>
 <script type="text/javascript" src="/javascript/user_image_preview.js"></script>
+<script type="text/javascript" src="/javascript/toggle_friend.js"></script>

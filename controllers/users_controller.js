@@ -1,5 +1,6 @@
 
 const Users = require("../models/users");
+const Friendships = require("../models/friendships");
 const fs = require("fs");
 const path = require("path");
 
@@ -8,9 +9,25 @@ module.exports.profile = async function(request , response){
     try{
         let user = await Users.findById(request.params.id );
 
+        let friendship1, friendship2, removeFriend = false;
+        friendship1 = await Friendships.findOne({
+            from_user : request.user , 
+            to_user : request.params.id
+        });
+    
+        friendship2 = await Friendships.findOne({
+            from_user : request.params.id , 
+            to_user : request.user
+        });
+
+        console.log(friendship1 , friendship2)
+        if(friendship1 || friendship2){
+            removeFriend = true;
+        }
         return response.render("users" , {
             title:"Codeial | Profile",
-            profile_user : user
+            profile_user : user,
+            removeFriend : removeFriend
         });
 
     }catch(error){
