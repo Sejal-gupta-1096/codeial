@@ -3,8 +3,10 @@
 //1)Getting mongoose package
 const mongoose = require("mongoose");
 
+const env = require("./environment");
+
 //2)Connecting to Mongodb database
-mongoose.connect("mongodb://localhost/codeial_development");
+mongoose.connect(`mongodb://localhost/${env.db}`);
 
 //3)Acquiring the connection
 const db = mongoose.connection;

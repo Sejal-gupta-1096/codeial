@@ -2,6 +2,8 @@
 const express = require("express");
 const app = express();
 
+const env = require("./config/environment");
+
 //2)defining port no.
 const port = 100;
  
@@ -48,10 +50,12 @@ chatServer.listen(200 , function(error){
     }
     
 })
+
+const path = require("path");
 //setting config for using sass(it has to be written before the server starts so that it can compile all the sass files into css)
 app.use(sassMiddleware({
-    src: "./assets/scss",
-    dest: "./assets/css",
+    src: path.join(__dirname , env.assets_path , "scss"),
+    dest: path.join(__dirname , env.assets_path , "css"),
     debug: true,
     outputStyle: 'extended',
     prefix:  '/css'  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
@@ -64,7 +68,7 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 
 //7)Linking static files
-app.use(express.static("./assets"));
+app.use(express.static(env.assets_path));
 
 
 app.use(expressLayouts);
@@ -80,7 +84,7 @@ app.set("views" , "./views");
 //using express session to encrypt user data and stores in the cookie (This cookie is then stored in database)
 app.use(session({
     name : "codeial",
-    secret : "somethingsomething" , 
+    secret : env.session_cookie_key , 
     saveUninitialized : false,
     resave : false , 
     cookie : {
