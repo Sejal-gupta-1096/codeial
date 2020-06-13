@@ -1,0 +1,12 @@
+footer {
+  background-color: gray;
+  display: flex;
+  flex-direction: row; }
+  footer span {
+    color: white;
+    align-self: center; }
+  footer ul {
+    list-style-type: none; }
+    footer ul li a {
+      color: white;
+      text-decoration: none; }

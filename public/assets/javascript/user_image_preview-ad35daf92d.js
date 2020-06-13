@@ -1,0 +1,1 @@
+let preview=function(){$("#change-avtar").change((function(){const e=new FileReader;let t=event.target.files[0];e.readAsDataURL(t),e.addEventListener("load",(function(){$("#img").attr("src",this.result),console.log(this,this.result)}))}))};preview();

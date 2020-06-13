@@ -1,0 +1,1 @@
+header{background-color:#5a5aec;display:flex;flex-direction:row}header #logo{float:left}header #logo h2{color:#fff;margin-left:1rem}header #auth{margin-left:auto}header #auth ul{list-style-type:none}header #auth ul li{display:inline-block;margin-right:1rem;color:#fff}header #auth ul a{color:#fff;font-size:x-large;text-decoration:none}
