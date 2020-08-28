@@ -1,0 +1,22 @@
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="<%= assetPath('/css/auth.css') %>"
+/>
+
+<form action="/users/create-session" method="POST" class="login-form">
+  <span class="login-signup-header">Log In</span>
+  <% if(false){ %>
+  <div class="alert error-dailog">Error</div>
+  <% } %>
+  <div class="field">
+    <input name="email" type="email" placeholder="Enter Email" required />
+  </div>
+  <div class="field">
+    <input type="password" name="password" placeholder="Password" required />
+  </div>
+  <div class="field">
+    <button type="submit">Log In</button>
+  </div>
+</form>
+<a href="/users/auth/google">Sign In/ Sign Up</a>

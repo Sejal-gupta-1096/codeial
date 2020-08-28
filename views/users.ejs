@@ -1,0 +1,102 @@
+<link rel="stylesheet" type="text/css" href="<%= assetPath('/css/users-profile.css') %>">
+
+                
+                <% if(user.id == profile_user.id){ %>
+                        <form id="update-form" action="/users/update?id=<%= profile_user._id %>" method="POST" enctype="multipart/form-data" >
+                        <div class="settings">
+                                <div class="img-container">
+                                  <img
+                                    src="<%= locals.user.avtar %>"
+                                    alt="user-dp"
+                                  />
+                                </div>
+                        
+                                <!-- {this.props.auth.error === false && <div className='alert success-dailog'>User Updated Successfully!</div>} -->
+                                <!-- {this.props.auth.error && <div className='alert error-dailog'>{this.props.auth.error}</div>} -->
+                                <!-- <input id="change-avtar" type="file" name="avtar" placeholder="Profile Picture"> -->
+                                <div style="display: flex;flex-direction: row;">
+                                  <div id="upload">
+                                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;UPLOAD
+                                </div>
+                                  <input type="file" name='avtar' />
+                                </div>
+                                <div class="field">
+                                  <div class="field-label">Email</div>
+                                  <input
+                                      type="email"
+                                      name='email'
+                                      value=<%= profile_user.email %>
+                                    />
+                                </div>
+                        
+                                <div class="field">
+                                  <div class="field-label">Name</div>
+                                    <input
+                                      type="text"
+                                      name='name'
+                                      value=<%= profile_user.name %>
+                                    />
+                                </div>
+                        
+                                  <div class="field">
+                                    <div class="field-label">New password</div>
+                        
+                                    <input
+                                      type="password"
+                                      name='password'
+                                    />
+                                  </div>
+                        
+                                  <div class="field">
+                                    <div class="field-label">Confirm password</div>
+                        
+                                    <input
+                                      type="password"
+                                      name='confirm_password'
+                                    />
+                                  </div>
+                        
+                                <div class="btn-grp">
+                                    <button type="submit" class="button save-btn">Save</button>
+                                </div>
+                              </div>
+                        </form>
+                       
+                <% }else{ %>
+
+                        <div class="settings">
+                                <div class="img-container">
+                                  <img
+                                    src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                                    alt="user-dp"
+                                  />
+                                </div>
+                        
+                                <div class="field">
+                                  <div class="field-label">Email</div>
+                                  <div class="field-value"><%= locals.profile_user.email %></div>
+                                </div>
+                        
+                                <div class="field">
+                                  <div class="field-label">Name</div>
+                                  <div class="field-value"><%= locals.profile_user.name %></div>
+                                </div>
+                        
+                                <div class="btn-grp">
+                                        <% if(locals.removeFriend){ %>
+                                                <button class="btn save-btn">Remove Friend<button>
+                                        <% }else{ %>
+                                                <button class="btn save-btn">Add Friend<button>
+                                        <% } %>
+                                </div>
+                        
+                                <!-- {this.state.addSuccess && <div class='alert success-dailog'>{this.state.addSuccess}</div>}
+                                {this.state.addError && <div class='alert error-dailog'>{this.state.addError}</div>}
+                                {this.state.removeSuccess && <div className='alert success-dailog'>{this.state.removeSuccess}</div>}
+                                {this.state.removeError && <div className='alert error-dailog'>{this.state.removeError}</div>} -->
+                                
+                              </div>
+                       
+                <% } %>
+<script type="text/javascript" src="<%= assetPath('javascript/user_image_preview.js') %>"></script>
+<script type="text/javascript" src="<%= assetPath('javascript/toggle_friend.js') %>"></script>

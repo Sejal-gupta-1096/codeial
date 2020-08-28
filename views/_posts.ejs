@@ -1,0 +1,63 @@
+<div  id="post-<%= i.id %>" class="post-wrapper">
+  <div class="post-header">
+    <div class="post-avatar">
+      <a href="">
+        <img
+          src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+          alt="user-pic"
+        />
+      </a>
+      <div>
+        <span class="post-author"><%= i.user.name %></span>
+        <span class="post-time">a minute ago</span>
+      </div>
+      <% if(locals.user && locals.user.id == i.user.id){%>
+      <button class="delete-btn no-btn">
+        <a class="delete-post-btn" href="/posts/delete-post/<%= i._id %>"
+          ><i class="fas fa-times"></i
+        ></a>
+      </button>
+      <% } %>
+    </div>
+    <div class="post-content"><%= i.content %></div>
+
+    <div class="post-actions">
+      <button class="post-like no-btn">
+        <% if(false){ %>
+        <img
+          src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+          alt="likes-icon"
+        />
+        <% }else{ %>
+        <img
+          src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+          alt="likes-icon"
+        />
+        <% } %>
+
+        <span><%= i.likes.length %></span>
+      </button>
+
+      <div class="post-comments-icon">
+        <img
+          src="https://image.flaticon.com/icons/svg/1380/1380338.svg"
+          alt="comments-icon"
+        />
+        <span><%= i.comments.length %></span>
+      </div>
+    </div>
+    <% if(locals.user){ %>
+    <div class="post-comment-box">
+      <form id="post-<%= i.id %>-comments-form" class="comments-form" action="/comments/add-comment" method="POST">
+        <input type="text" name="content" required />
+        <input type="hidden" name="post" value="<%= i._id %>" />
+        <input type="submit" value="Add Comment" />
+      </form>
+    </div>
+    <% } %>
+
+    <div id='post-comments-<%= i.id %>' class="post-comments-list">
+      <% for(comment of i.comments){ %> <%- include("_comments") -%> <% } %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title><%= title%></title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="<%= assetPath('/css/layout.css') %>"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="<%= assetPath('/css/header.css') %>"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="<%= assetPath('/css/footer.css') %>"
+    />
+    <%- style %>
+  </head>
+  <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
+  ></script>
+  <body>
+
+    <script>
+        <% if(flash.success && flash.success.length > 0) { %>
+        new Noty({
+            layout: 'topRight',
+            theme: 'relax', // or relax
+            type: 'success', // success, error, warning, information, notification
+            text: '<%= flash.success %>', // [string|html] can be HTML or STRING
+            timeout : 1500
+        }).show();
+    <% } %>
+
+    <% if(flash.error && flash.error.length > 0) { %>
+        new Noty({
+            layout: 'topRight',
+            theme: 'relax', // or relax
+            type: 'error', // success, error, warning, information, notification
+            text: '<%= flash.error %>', // [string|html] can be HTML or STRING
+            timeout : 1500
+        }).show();
+    <% } %>
+  </script>
+    <%- include("_header") %>
+
+    
+
+    <%- body %> <%- include("_footer") %>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/90f89e9e87.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <%- script %>
+  </body>
+</html>

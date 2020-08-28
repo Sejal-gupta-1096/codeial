@@ -1,0 +1,50 @@
+<nav class="nav">
+  <div class="left-div">
+    <a href="/">
+      <img
+        class="img img-rounded"
+        src="https://ninjasfiles.s3.amazonaws.com/0000000000003454.png"
+        alt="logo"
+      />
+    </a>
+  </div>
+
+  <div class="search-container">
+    <img
+      class="search-icon"
+      src="https://image.flaticon.com/icons/svg/483/483356.svg"
+      alt="search-icon"
+    />
+    <input placeholder="Search" />
+  </div>
+  <div class="right-nav">
+    <% if(locals.user){ %>
+    <div class="user">
+      <a href="/users/profile?id=<%= locals.user._id %>">
+        <img class="rounded-circle" src="<%= locals.user.avtar %>" alt="user-dp" id="user-dp" />
+      </a>
+      <span><%= user.name %></span>
+    </div>
+    <% } %>
+    <div class="nav-links">
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <% if(!locals.user){ %>
+        <li>
+          <a href="/users/sign-up">Signup</a>
+        </li>
+        <% } %> <% if(!locals.user){ %>
+        <li>
+          <a href="/users/sign-in">Login</a>
+        </li>
+        <% } %> <% if(locals.user){ %>
+        <li>
+          <a href="/users/sign-out">Sign Out</a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>

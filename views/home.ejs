@@ -1,0 +1,71 @@
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="<%= assetPath('css/home.css') %>"
+/>
+
+<div class="home">
+  <div class="feed">
+    <% if(locals.user){ %>
+    <div class="create-post">
+      <form id="post-form" action="/posts/add-post" method="POST">
+        <textarea
+          class="add-post"
+          name="content"
+          placeholder="Type Here.."
+          required
+        ></textarea>
+        <input id="add-post-btn" type="submit" value="Post" />
+      </form>
+    </div>
+    <% } %>
+    <div id="posts-list-container" class="posts-list">
+      <% for(i of posts){ %> <%- include("_posts") -%> <% } %>
+    </div>
+  </div>
+
+  <% if(locals.user) { %>
+  <div class="friends-list">
+    <div class="header">Friends</div>
+    <% if(locals.user.friends.length == 0) {%>
+    <div className="no-friends">No friends found!</div>
+    <% }else{ %> <% for(friends of locals.user.friends){ %> <%
+    if(friends.from_user.id == locals.user.id) {%>
+    <div>
+      <a class="friends-item" href="/users/">
+        <div class="friends-img">
+          <img
+            src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+            alt="user-pic"
+          />
+        </div>
+        <div class="friends-name"><%= friends.to_user.name %></div>
+      </a>
+    </div>
+    <%}%> <% if(friends.to_user.id == locals.user.id) {%>
+    <div>
+      <a class="friends-item" href="/users/">
+        <div class="friends-img">
+          <img
+            src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+            alt="user-pic"
+          />
+        </div>
+        <div class="friends-name"><%= friends.from_user.name %></div>
+      </a>
+    </div>
+    <% } %> <% } %> <% } %>
+  </div>
+  <% } %> <%- include("_chat_box") %>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="<%= assetPath('javascript/chat_engine.js') %>"></script>
+<% if(locals.user) {%>
+<script>
+  new ChatEngine("user-chat-box", "<%= locals.user.email %>");
+</script>
+<% } %>
+<script src="<%= assetPath('javascript/home_posts.js') %>"></script>
+<script src="<%= assetPath('javascript/posts_comments.js') %>"></script>
+<script src="<%= assetPath('javascript/toggle-likes.js') %>"></script>

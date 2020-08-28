@@ -1,0 +1,36 @@
+<div id='comment-<%= comment.id %>' class="post-comment-item">
+  <div class="post-comment-header">
+    <span class="post-comment-author"><%= comment.user.name %></span>
+    <span class="post-comment-time">a minute ago</span>
+    <div class="post-actions">
+      <button class="post-like no-btn">
+        <% if(false){ %>
+        <img
+          src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+          alt="likes-icon"
+        />
+        <% }else{ %>
+        <img
+          src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+          alt="likes-icon"
+        />
+        <% } %>
+        <span class="post-comment-likes"
+          ><%= comment.likes.length %> likes</span
+        >
+      </button>
+    </div>
+    <% if(locals.user && locals.user.id == comment.user._id){%>
+    <button class="delete-btn no-btn">
+      <a
+        class="delete-comment-btn delete-post-btn"
+        href="/comments/delete-comment/<%= comment._id %>"
+        ><i class="fas fa-times"></i
+      ></a>
+    </button>
+    <% } %>
+  </div>
+
+  <div class="post-comment-content"><%= comment.content %></div>
+</div>
+
