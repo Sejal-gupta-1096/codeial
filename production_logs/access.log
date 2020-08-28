@@ -2426,3 +2426,14 @@
 [0mDELETE /api/v1/posts [33m404[0m 19.339 ms - 154[0m
 [0mGET /api/v1/posts [32m200[0m 91.613 ms - 4526[0m
 [0mDELETE /api/v1/posts/5f48cdc3824f7834206e16e0 [32m200[0m 35.860 ms - 63[0m
+[0mGET / [32m200[0m 3976.652 ms - 10869[0m
+[0mGET /javascript/chat_engine.js [36m304[0m 1519.692 ms - -[0m
+[0mGET /javascript/home_posts.js [36m304[0m 163.722 ms - -[0m
+[0mGET /javascript/toggle-likes.js [36m304[0m 5.721 ms - -[0m
+[0mGET /javascript/posts_comments.js [36m304[0m 7.023 ms - -[0m
+[0mGET /css/footer.css [32m200[0m 26.772 ms - 252[0m
+[0mGET /css/chat-box.css [32m200[0m 2.055 ms - 1276[0m
+[0mGET /javascript/posts_comments.js [32m200[0m 30.955 ms - 5871[0m
+[0mGET /javascript/toggle-likes.js [32m200[0m 31.441 ms - 927[0m
+[0mGET /favicon.ico [33m404[0m 73.498 ms - 150[0m
+[0mPOST /api/v1/users/create-session [32m200[0m 1509.998 ms - 546[0m
