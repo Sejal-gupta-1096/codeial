@@ -5,7 +5,7 @@ module.exports.newComment = function(comment){
     let htmlString = nodeMailer.renderTemplate({comment:comment} , "/comments/new_comment.ejs");
 
     nodeMailer.transporter.sendMail({
-        from: 'sejal1096.cse18@chitkara.edu.in', // sender address
+        from: 'sejalg1096@gmail.com', // sender address
         to: comment.user.email, // list of receivers
         subject: "New Comment Published", // Subject line
         html: htmlString // html body
