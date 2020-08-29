@@ -54,7 +54,7 @@
 }
 
 /* CREATEPOST */
-.feed{
+.feed {
   flex-grow: 0.8;
   flex-direction: column;
 }
@@ -240,10 +240,12 @@
   cursor: pointer;
 }
 
-.delete-btn{
+.delete-btn {
   margin-left: auto;
 }
-.delete-post-btn{
+.delete-post-btn {
   color: black;
-  font-size:larger;
+  font-size: larger;
 }
+
+
