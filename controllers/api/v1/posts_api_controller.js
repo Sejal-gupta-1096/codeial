@@ -17,16 +17,26 @@ module.exports.index = async function(request , response){
 module.exports.deletePost = async function(request , response){
 
     try{
+        
         let post = await Posts.findById(request.params.id);
+
+        console.log(request.user._id , post.user)
+        if(request.user.id == post.user){
             post.remove();
             let comments = await Comments.deleteMany({post : request.params.id});
 
-            
+            console.log('deleted' , post)
                 return response.status(200).json({
                     post_id : request.params.id , 
                     message : "Post Deleted"
             
                 })
+            }else{
+                console.log('not deleted' , post)
+                return response.status(401).json({
+                    message : 'You are not authorized to delete the post'
+                })
+            }
     }catch(error){
         console.log("Error" , error);
         return;
