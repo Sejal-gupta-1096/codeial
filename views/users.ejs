@@ -5,10 +5,19 @@
                         <form id="update-form" action="/users/update?id=<%= profile_user._id %>" method="POST" enctype="multipart/form-data" >
                         <div class="settings">
                                 <div class="img-container">
+                                
+                                  <% if(locals.user.avtar == undefined){ %>
                                   <img
+                                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                                  alt="user-pic"
+                                />
+                                  <% }else{%>
+                                    <img
                                     src="<%= locals.user.avtar %>"
                                     alt="user-dp"
                                   />
+                                  <% } %>
+                                  
                                 </div>
                         
                                 <!-- {this.props.auth.error === false && <div className='alert success-dailog'>User Updated Successfully!</div>} -->

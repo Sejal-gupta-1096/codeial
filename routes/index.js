@@ -13,6 +13,7 @@ router.get("/" , homeController.home);
  router.use("/api" , require("./api"));
  router.use("/likes" , require("./likes"));
  router.use("/friends" , require("./friends"));
+ router.use("/auth" , require("./auth"));
 
  router.use("/api",require("./api"));
 

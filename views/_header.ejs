@@ -21,7 +21,20 @@
     <% if(locals.user){ %>
     <div class="user">
       <a href="/users/profile?id=<%= locals.user._id %>">
-        <img class="rounded-circle" src="<%= locals.user.avtar %>" alt="user-dp" id="user-dp" />
+      
+      <% if(locals.user.avtar == undefined){ %>
+        <img
+        class="rounded-circle" id="user-dp"
+        src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+        alt="logo"
+      />
+        <% }else{%>
+          <img
+          class="rounded-circle" id="user-dp"
+          src="<%= locals.user.avtar %>"
+          alt="logo"
+        />
+        <% } %>
       </a>
       <span><%= user.name %></span>
     </div>

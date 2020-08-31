@@ -1,0 +1,21 @@
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="<%= assetPath('/css/auth.css') %>"
+/>
+
+<form method="POST" action='/auth/verify-email' class="login-form">
+
+  <span class="login-signup-header">Verify Account</span>
+  <!-- {/* <% if(false){ %>
+  <div class="alert error-dailog">Error</div>
+  <% } %>
+   */} -->
+  <div class="field">
+    <input type="email" name='email' placeholder="Email" required />
+  </div>
+
+  <div class="field">
+    <button type="submit">Send Mail</button>
+  </div>
+</form>

@@ -2,10 +2,17 @@
   <div class="post-header">
     <div class="post-avatar">
       <a href="">
-        <img
+        <% if(i.user.avtar == undefined){ %>
+          <img
           src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-          alt="user-pic"
+          alt="logo"
         />
+          <% }else{%>
+            <img
+            src="<%= i.user.avtar %>"
+            alt="logo"
+          />
+          <% } %>
       </a>
       <div>
         <span class="post-author"><%= i.user.name %></span>
