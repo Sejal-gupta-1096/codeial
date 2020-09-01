@@ -30,19 +30,30 @@
 
     <div class="post-actions">
       <button class="post-like no-btn">
-        <% if(false){ %>
-        <img
-          src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
-          alt="likes-icon"
-        />
-        <% }else{ %>
-        <img
-          src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
-          alt="likes-icon"
-        />
+        <a data-likes="<%= i.likes.length %>" class="toggle-btn" href="/likes/toggle?id=<%= i._id %>&type=Posts">
+        <% let flag = false %>
+          <% for(let like of i.likes){ %>
+          <% if(like.user == locals.user.id){ %>
+            <% flag = true  %>
+          <% } %>
         <% } %>
-
+         
+        <% if(flag) {%>
+          <img
+            src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+            alt="likes-icon"
+          />
+        <% } else{%>
+           <img
+            src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+            alt="likes-icon"
+          />
+        <% } %>
         <span><%= i.likes.length %></span>
+      </a>
+       
+
+        
       </button>
 
       <div class="post-comments-icon">

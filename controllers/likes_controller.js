@@ -40,6 +40,7 @@ module.exports.toggleLike = async function(request , response){
         if(request.xhr){
             return response.status(200).json({
                 deleted : deleted , 
+                likeableType : likeableType,
                 message : "Request Successful"
             });
         }
