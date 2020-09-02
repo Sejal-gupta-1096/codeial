@@ -92,11 +92,28 @@
                                 </div>
                         
                                 <div class="btn-grp">
-                                        <% if(locals.removeFriend){ %>
-                                                <button class="btn save-btn">Remove Friend<button>
-                                        <% }else{ %>
-                                                <button class="btn save-btn">Add Friend<button>
-                                        <% } %>
+                                  <% let isFriend = false %>
+                                  <% for(let friend of locals.populated_user.friends){ %>
+                                   
+                                    <% if(friend.to_user == profile_user.id || friend.from_user == profile_user.id){ %>
+                                      <% isFriend = true %>
+                                    <% } %>
+                                  <% } %>
+
+                                  <% if(isFriend){%>
+                                    <button class="btn save-btn">
+                                      <a style="color:white;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
+                                        Remove Friend
+                                      </a>
+                                    </button>
+                                  <% }else{%>
+                                    <button class="btn save-btn">
+                                      <a style="color:white;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
+                                        Add Friend
+                                      </a>
+                                    </button>
+                                  <% } %>
+
                                 </div>
                         
                                 <!-- {this.state.addSuccess && <div class='alert success-dailog'>{this.state.addSuccess}</div>}
@@ -107,5 +124,6 @@
                               </div>
                        
                 <% } %>
-<script type="text/javascript" src="<%= assetPath('javascript/user_image_preview.js') %>"></script>
-<script type="text/javascript" src="<%= assetPath('javascript/toggle_friend.js') %>"></script>
+
+                <script src="<%= assetPath('/javascript/user_image_preview.js') %>"></script>
+                <script src="<%= assetPath('/javascript/toggle_friend.js') %>"></script>

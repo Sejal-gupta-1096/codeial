@@ -11,31 +11,40 @@ module.exports.addFriend = async function(request , response){
         to_user : request.query.id,
     });
 
-    let user = await Users.findById(request.user);
+    let toUser = await Users.findById(request.user);
+    let fromUser = await Users.findById(request.query.id);
+
     let deleted = false;
 
     if(existingFriendship){
-        user.friends.pull(existingFriendship._id);
-        user.save();
+        toUser.friends.pull(existingFriendship._id);
+        fromUser.friends.pull(existingFriendship._id);
+        toUser.save();
+        fromUser.save();
         existingFriendship.remove();
+        deleted = true;
+        removeFriend = true;
     }else{
         let friendship = await Friendships.create({
             to_user : request.query.id,
             from_user : request.user._id
         });
 
-        user.friends.push(friendship);
-        user.save();
-        deleted = true;
+        toUser.friends.push(friendship);
+        fromUser.friends.push(friendship);
+        toUser.save();
+        fromUser.save();
     }
 
     if(request.xhr){
         return response.status(200).json({
             deleted : deleted , 
-            message : "Request Successful"
+            message : "Request Successful",
         });
     }
 
-    
-     return response.redirect("back");
+
+    console.log(populated_user);
+     return response.redirect("back" , {
+     });
 }

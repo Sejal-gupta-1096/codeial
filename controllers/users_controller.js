@@ -5,17 +5,11 @@ const path = require("path");
 
 module.exports.profile = async function (request, response) {
   try {
-    console.log(request.query.id);
-    if (request.query.id.match(/^[0-9a-fA-F]{24}$/)) {
-      console.log("Matched");
-    }
-    console.log(request.query.id);
-    //let id = ObjectId.fromString(request.query.id);
+   
     let user = await Users.findOne({ _id: request.query.id });
 
-    let friendship1,
-      friendship2,
-      removeFriend = false;
+    let friendship1,friendship2
+
     friendship1 = await Friendships.findOne({
       from_user: request.user,
       to_user: request.params.id,
@@ -26,14 +20,12 @@ module.exports.profile = async function (request, response) {
       to_user: request.user,
     });
 
-    console.log(friendship1, friendship2);
-    if (friendship1 || friendship2) {
-      removeFriend = true;
-    }
+    
+    let populated_user = await Users.findById(request.user).populate('friends');
     return response.render("users", {
       title: "Codeial | Profile",
       profile_user: user,
-      removeFriend: removeFriend,
+      populated_user
     });
   } catch (error) {
     console.log("Error", error);

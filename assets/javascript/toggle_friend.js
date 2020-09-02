@@ -8,10 +8,11 @@ function toggleFriend(toggleFriendBtn){
             type : "GET",
             url : $(toggleFriendBtn).attr("href"),
             success : function(data){
+                console.log(data.deleted);
                 if(data.deleted){
-                    $(toggleFriendBtn).html("Remove Friend")
-                }else{
                     $(toggleFriendBtn).html("Add Friend")
+                }else{
+                    $(toggleFriendBtn).html("Remove Friend")
                 }
                 
             },
@@ -25,5 +26,6 @@ function toggleFriend(toggleFriendBtn){
        })
 }
 
+console.log('hiii')
 
 toggleFriend($(".toggle-friend-btn"));
