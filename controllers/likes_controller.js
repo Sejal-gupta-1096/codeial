@@ -7,11 +7,14 @@ module.exports.toggleLike = async function(request , response){
     try{
         
         let likeableType , deleted = false;
+        let type='';
 
         if(request.query.type == "Posts"){
             likeableType = await Posts.findById(request.query.id).populate("likes");
+            type='Posts'
         }else{
             likeableType = await Comments.findById(request.query.id).populate("likes");
+            type='Comments'
         }
 
         let existingLike = await Likes.findOne({
@@ -39,6 +42,7 @@ module.exports.toggleLike = async function(request , response){
 
         if(request.xhr){
             return response.status(200).json({
+                type:type,
                 deleted : deleted , 
                 likeableType : likeableType,
                 message : "Request Successful"

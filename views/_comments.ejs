@@ -4,20 +4,35 @@
     <span class="post-comment-time">a minute ago</span>
     <div class="post-actions">
       <button class="post-like no-btn">
-        <% if(false){ %>
-        <img
-          src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
-          alt="likes-icon"
-        />
-        <% }else{ %>
-        <img
+        <% if(locals.user) {%>
+        <a data-likes="<%= comment.likes.length %>" class="toggle-btn" href="/likes/toggle?id=<%= comment._id %>&type=Comments">
+          <% let flag = false %>
+            <% for(let like of comment.likes){ %>
+            <% if(like.user == locals.user.id){ %>
+              <% flag = true  %>
+            <% } %>
+          <% } %>
+           
+          <% if(flag) {%>
+            <img
+              src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+              alt="likes-icon"
+            />
+          <% } else{%>
+             <img
+              src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+              alt="likes-icon"
+            />
+          <% } %>
+          <span><%= comment.likes.length %></span>
+        </a>
+        <%}else{%>
+          <img
           src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
           alt="likes-icon"
         />
-        <% } %>
-        <span class="post-comment-likes"
-          ><%= comment.likes.length %> likes</span
-        >
+          <span><%= comment.likes.length %></span>
+        <%}%>
       </button>
     </div>
     <% if(locals.user && locals.user.id == comment.user._id){%>

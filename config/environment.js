@@ -26,8 +26,8 @@ const development = {
             port: 587,
             secure: false, // true for 465, false for other ports
             auth: {
-            user: "sejalg1096@gmail.com", 
-            pass: "Sejal2000@" 
+            user: "sample@gmail.com", 
+            pass: "*****" 
             }
       },
     google_client_id: "301378759041-u8ioi94va6g3gcqrnq5saq2mj5vi4a02.apps.googleusercontent.com",

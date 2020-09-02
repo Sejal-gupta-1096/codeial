@@ -30,8 +30,10 @@
 
     <div class="post-actions">
       <button class="post-like no-btn">
+        <%if(locals.user){%>
         <a data-likes="<%= i.likes.length %>" class="toggle-btn" href="/likes/toggle?id=<%= i._id %>&type=Posts">
         <% let flag = false %>
+       
           <% for(let like of i.likes){ %>
           <% if(like.user == locals.user.id){ %>
             <% flag = true  %>
@@ -51,6 +53,13 @@
         <% } %>
         <span><%= i.likes.length %></span>
       </a>
+    <%}else{%>
+      <img
+      src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+      alt="likes-icon"
+    />
+      <span><%= i.likes.length %></span>
+    <%}%>
        
 
         
