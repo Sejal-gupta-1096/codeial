@@ -17,7 +17,7 @@ var accessLogStream = rfs.createStream('access.log', {
 
 const development = {
     name : "development",
-    assets_path : "/assets",
+    assets_path : "assets",
     session_cookie_key : "somethingsomething",
     db : "codeial_development",
     smtp : {
@@ -63,4 +63,6 @@ const production = {
     }
 }
 
+
+//module.exports = development
 module.exports = eval(process.env.NODE_ENV) == undefined ? development : eval(process.env.NODE_ENV);

@@ -40,7 +40,8 @@ gulp.task('css', function (done) {
 
 //Minified images
 gulp.task('images', function (done) {
-    gulp.src('.assets/**/*.(png|jpg|svg|gif|jpeg)')
+    gulp.src('./assets/**/*.(png|jpg|svg|gif|jpeg)')
+    //gulp.src('./uploads/**/**/*.(png|jpg|svg|gif|jpeg)')
    .pipe(imagemin())
    .pipe(rev())
    .pipe(gulp.dest('./public/assets'))

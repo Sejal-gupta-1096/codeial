@@ -1,1 +1,0 @@
-function toggleLike(e){console.log(e),$(e).click((function(t){t.preventDefault(),$.ajax({type:"GET",url:$(e).attr("href"),success:function(t){let o=$(e).attr("data-likes");console.log(o),console.log(t),t.deleted?o--:o++,$(e).attr("data-likes",o),$(e).html(o+" Likes")},error:function(e){console.log(e.responseText)}})}))}$(".toggle-btn").each((function(){toggleLike($(this))}));

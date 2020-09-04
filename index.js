@@ -85,8 +85,8 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 
 //7)Linking static files
-app.use(express.static(path.join(__dirname ,env.assets_path)));
-
+app.use(express.static(__dirname + "/" + env.assets_path));
+console.log(__dirname + "/" + env.assets_path)
 
 app.use(expressLayouts);
 

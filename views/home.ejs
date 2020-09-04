@@ -1,7 +1,7 @@
 <link
   type="text/css"
   rel="stylesheet"
-  href="<%= assetPath('css/home.css') %>"
+  href="<%= assetPath('/css/home.css') %>"
 />
 
 <div class="home">
@@ -78,12 +78,12 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-<script src="<%= assetPath('javascript/chat_engine.js') %>"></script>
+<script src="<%= assetPath('/javascript/chat_engine.js') %>"></script>
 <% if(locals.user) {%>
 <script>
   new ChatEngine("user-chat-box", "<%= locals.user.email %>");
 </script>
 <% } %>
-<script src="<%= assetPath('javascript/home_posts.js') %>"></script>
-<script src="<%= assetPath('javascript/posts_comments.js') %>"></script>
-<script src="<%= assetPath('javascript/toggle-likes.js') %>"></script>
+<script src="<%= assetPath('/javascript/home_posts.js') %>"></script>
+<script src="<%= assetPath('/javascript/posts_comments.js') %>"></script>
+<script src="<%= assetPath('/javascript/toggle-likes.js') %>"></script>
