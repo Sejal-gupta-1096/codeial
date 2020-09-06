@@ -14,6 +14,7 @@ gulp.task('css', function (done) {
       .pipe(gulp.dest('./assets.css'));
 
        gulp.src('./assets/**/*.css')
+     // gulp.src('./assets.css/*.css')
       .pipe(rev())
       .pipe(gulp.dest('./public/assets'))
       .pipe(rev.manifest({

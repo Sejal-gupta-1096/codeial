@@ -29,3 +29,4 @@ function toggleFriend(toggleFriendBtn){
 console.log('hiii')
 
 toggleFriend($(".toggle-friend-btn"));
+//c

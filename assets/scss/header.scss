@@ -1,4 +1,4 @@
-/* NAVBAR */
+
 .nav {
   display: flex;
   background: #6200ee;
@@ -52,7 +52,6 @@ nav .nav-links ul li:hover {
 
 .search-container {
   flex-grow: 0.5;
-  /* padding: 0 20px; */
   position: relative;
   display: flex;
 }
@@ -88,7 +87,6 @@ nav .nav-links ul li:hover {
   z-index: 100;
   max-height: 452px;
   overflow: scroll;
-  /* display: none; */
 }
 .search-results ul {
   list-style-type: none;

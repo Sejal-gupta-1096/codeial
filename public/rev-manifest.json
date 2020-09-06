@@ -1,8 +1,9 @@
 {
+  "css/auth.css": "css/auth-9dfa32172c.css",
   "css/chat-box.css": "css/chat-box-07518463a8.css",
   "css/footer.css": "css/footer-f5277933e7.css",
-  "css/header.css": "css/header-6c1179d349.css",
-  "css/home.css": "css/home-69c06c4ce9.css",
-  "css/layout.css": "css/layout-58513c837e.css",
-  "css/users-profile.css": "css/users-profile-d41d8cd98f.css"
+  "css/header.css": "css/header-59416c5a7e.css",
+  "css/home.css": "css/home-359cc9d9a3.css",
+  "css/layout.css": "css/layout-cc9e473445.css",
+  "css/users-profile.css": "css/users-profile-2678cdfb2b.css"
 }
