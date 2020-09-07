@@ -5,7 +5,7 @@ const app = express();
 const env = require("./config/environment");
 
 //2)defining port no.
-const port = 100;
+const port = 8000;
 
 //6) Installing and acquiring express-ejs-layouts
 const expressLayouts = require("express-ejs-layouts");
