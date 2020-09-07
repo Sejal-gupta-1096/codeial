@@ -47,7 +47,7 @@ const morgan = require("morgan");
 const path = require("path");
 const rfs = require("rotating-file-stream");
 
-chatServer.listen(1000, function (error) {
+chatServer.listen(5000, function (error) {
   if (error) {
     console.log("Error in setting up Chat Server");
   } else {
