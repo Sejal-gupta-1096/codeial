@@ -75,7 +75,7 @@ if (env.name == "development") {
 app.use(morgan(env.morgan.mode, env.morgan.options));
 
 //10)Setting middleware for decoding the post request
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:false}));
 
 //After requiring cookies we have to use this middleware for using cookies
 app.use(cookieParser());
