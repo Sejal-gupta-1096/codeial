@@ -1,7 +1,7 @@
 <div  id="post-<%= i.id %>" class="post-wrapper">
   <div class="post-header">
     <div class="post-avatar">
-      <a href="">
+      <a href="/users/profile?id=<%= i.user._id %>">
         <% if(i.user.avtar == undefined){ %>
           <img
           src="https://image.flaticon.com/icons/svg/2154/2154651.svg"

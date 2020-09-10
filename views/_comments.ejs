@@ -1,6 +1,22 @@
 <div id='comment-<%= comment.id %>' class="post-comment-item">
   <div class="post-comment-header">
-    <span class="post-comment-author"><%= comment.user.name %></span>
+    <span class="post-comment-author">
+      <a href="/users/profile?id=<%= comment.user._id %>">
+      <% if(comment.user.avtar == undefined){ %>
+        <img
+        class="rounded-circle comment-avtar" 
+        src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+        alt="logo"
+      />
+        <% }else{%>
+          <img
+          class="rounded-circle comment-avtar"
+          src="<%=comment.user.avtar%>"
+          alt="logo"
+        />
+        <% } %>
+      </a>
+       <%= comment.user.name %></span>
     <span class="post-comment-time">a minute ago</span>
     <div class="post-actions">
       <button class="post-like no-btn">

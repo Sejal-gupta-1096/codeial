@@ -39,16 +39,17 @@ module.exports.home = async function (request, response) {
         path: "comments",
         populate: {
           path: "user",
-          model: "Users",
         },
-
+      })
+      .populate({
+        path: "comments",
         populate: {
           path: "likes",
         },
       })
       .populate("likes");
 
-    
+  
     let users = await User.find({});
 
     let user;
