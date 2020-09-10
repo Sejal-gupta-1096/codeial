@@ -63,6 +63,7 @@
   border: 1px solid #e0e0e0;
   box-sizing: border-box;
   border-radius: 4px;
+  height: 30%;
 }
 .create-post > div {
   padding: 10px;
@@ -71,7 +72,7 @@
   justify-content: flex-end;
 }
 .create-post textarea {
-  height: 90px;
+  height: 75%;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
@@ -82,9 +83,9 @@
   border-top-left-radius: 3px;
 }
 #add-post-btn {
-  width: 112px;
-  height: 42px;
-  left: 111.5px;
+  width: 15%;
+  height: 25%;
+  float: right;
   top: 0px;
   background: #ef7917;
   border-radius: 3px;
@@ -245,4 +246,6 @@
   font-size: larger;
 }
 
-
+.comment-avtar{
+  height: 40px;
+}
